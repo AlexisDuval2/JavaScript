@@ -1,16 +1,9 @@
 
 ///////////////////////////////////
-// variables globales
-///////////////////////////////////
-let ligne1 = null;
-let controleur = null
-
-///////////////////////////////////
 // fonction principale
 ///////////////////////////////////
 window.onload = () => {
 
-	ligne1 = document.getElementById("ligne-1");
 	controlerCarre();
 }
 
@@ -19,17 +12,19 @@ window.onload = () => {
 ///////////////////////////////////
 const controlerCarre = () => {
 
+	let controleur = null
+	let ligne1 = document.getElementById("ligne-1");
 	let anime = false;
 
 	ligne1.onclick = () => {
 
 		if (!anime) {
 			anime = true;
-			animerCarre();
+			controleur = animerCarre();
 		}
 		else {
 			anime = false;
-			arreterCarre();
+			arreterCarre(controleur);
 		}
 	}
 }
@@ -39,6 +34,8 @@ const controlerCarre = () => {
 ///////////////////////////////////
 const animerCarre = () => {
 
+	let controleur = null
+	let ligne1 = document.getElementById("ligne-1");
 	const delai = 42;
 	const valeurPrChanger = 75;
 	let acceleration = 1;
@@ -56,12 +53,14 @@ const animerCarre = () => {
 		else if (vitesse < -valeurPrChanger) { acceleration = 1; }
 
 	}, delai);
+
+	return controleur;
 }
 
 ///////////////////////////////////
 // fonction pour arrêter l'animation du carré
 ///////////////////////////////////
-const arreterCarre = () => {
+const arreterCarre = (controleur) => {
 
 	clearInterval(controleur);
 }
