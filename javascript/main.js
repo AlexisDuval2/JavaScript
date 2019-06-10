@@ -4,7 +4,36 @@
 ///////////////////////////////////
 window.onload = () => {
 
+	animerLeTitre();
 	controlerCarre();
+}
+
+///////////////////////////////////
+// fonction pour animer le titre
+///////////////////////////////////
+const animerLeTitre = () => {
+
+	const delai = 60;
+	const valeurDeControle = 96;
+	const couleur1 = "rgb(88,200,1)";
+	const couleur2 = "rgb(181,11,111)";
+
+	let titre = document.querySelector("h1");
+
+	titre.style.color = couleur1;
+
+	setInterval(function () {
+
+		let controleur = Math.random() * 100;
+
+		if (controleur < valeurDeControle) {
+			titre.style.color = couleur1;
+		}
+		else {
+			titre.style.color = couleur2;
+		}
+
+	}, delai);
 }
 
 ///////////////////////////////////
@@ -62,5 +91,8 @@ const animerCarre = () => {
 ///////////////////////////////////
 const arreterCarre = (controleur) => {
 
+	let ligne1 = document.getElementById("ligne-1");
+
 	clearInterval(controleur);
+	ligne1.style.transform = "rotate(0deg)";
 }
