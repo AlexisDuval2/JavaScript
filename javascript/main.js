@@ -4,8 +4,35 @@
 ///////////////////////////////////
 window.onload = () => {
 
+	animerLeFond();
 	animerLeTitre();
 	controlerCarre();
+}
+
+///////////////////////////////////
+// fonction pour animer le fond
+///////////////////////////////////
+const animerLeFond = () => {
+
+	const delai = 70;
+	const limite = 0.08;
+	let acceleration = 0.001;
+	let vitesse = 0;
+	let taille = 3;
+	let corps = document.querySelector("body");
+
+	setInterval(function () {
+
+		vitesse += acceleration;
+		taille += vitesse;
+
+		if (vitesse > limite || vitesse < -limite) {
+			acceleration *= -1;
+		}
+
+		corps.style.backgroundSize = taille + "px";
+
+	}, delai);
 }
 
 ///////////////////////////////////
@@ -14,9 +41,10 @@ window.onload = () => {
 const animerLeTitre = () => {
 
 	const delai = 60;
-	const valeurDeControle = 96;
-	const couleur1 = "rgb(88,200,1)";
-	const couleur2 = "rgb(181,11,111)";
+	const nbPrCouleurs = 97;
+	const nbPrStyle = 3;
+	const couleur1 = "rgb(72, 109, 17)";
+	const couleur2 = "rgb(255, 0, 212)";
 
 	let titre = document.querySelector("h1");
 
@@ -26,12 +54,11 @@ const animerLeTitre = () => {
 
 		let controleur = Math.random() * 100;
 
-		if (controleur < valeurDeControle) {
-			titre.style.color = couleur1;
-		}
-		else {
-			titre.style.color = couleur2;
-		}
+		if (controleur < nbPrCouleurs) {titre.style.color = couleur1;}
+		else {titre.style.color = couleur2;}
+
+		if (controleur < nbPrStyle) {titre.style.fontStyle = "italic";}
+		else {titre.style.fontStyle = "normal";}
 
 	}, delai);
 }
@@ -66,7 +93,7 @@ const animerCarre = () => {
 	let controleur = null
 	let ligne1 = document.getElementById("ligne-1");
 	const delai = 42;
-	const valeurPrChanger = 75;
+	const limite = 75;
 	let acceleration = 1;
 	let vitesse = 21;
 	let degres = 0;
@@ -78,8 +105,9 @@ const animerCarre = () => {
 		degres %= 360;
 		ligne1.style.transform = "rotate(" + degres + "deg)";
 
-		if (vitesse > valeurPrChanger) { acceleration = -1; }
-		else if (vitesse < -valeurPrChanger) { acceleration = 1; }
+		if (vitesse > limite || vitesse < -limite) {
+			acceleration *= -1;
+		}
 
 	}, delai);
 
